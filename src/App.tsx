@@ -13,8 +13,8 @@ function App() {
                     <Route index element={<Home/>}></Route>
                     <Route path={"/notes/:id"} element={<NoteDetail/>}></Route>
                 </Route>
-                <Route path={"/signin"} element={<Signin />}></Route>
-                <Route path={"/signup"} element={<Signup />}></Route>
+                <Route path={"/signin"} element={<Signin/>}></Route>
+                <Route path={"/signup"} element={<Signup/>}></Route>
             </Routes>
         </div>
     </BrowserRouter>;
