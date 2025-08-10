@@ -1,6 +1,5 @@
-import {atom} from "jotai/vanilla/atom";
+import {atom, useAtom} from "jotai";
 import {User} from "@supabase/supabase-js";
-import {useAtom} from "jotai/react/useAtom";
 
 const currentUserAtom = atom<User>();
 export const useCurrentUserStore = () => {
