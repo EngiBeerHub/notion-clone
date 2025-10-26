@@ -1,5 +1,5 @@
-import { Note } from '@/modules/notes/note';
-import TextAreaAutoSize from 'react-textarea-autosize';
+import { Note } from "@/modules/notes/note";
+import TextAreaAutoSize from "react-textarea-autosize";
 
 interface TitleInputProps {
   initialData: Note;

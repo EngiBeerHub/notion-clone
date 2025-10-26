@@ -1,24 +1,24 @@
-import {atom, useAtom} from "jotai";
-import {Note} from "@/modules/notes/note.entity.ts";
+import { atom, useAtom } from "jotai";
+import { Note } from "@/modules/notes/note.entity.ts";
 
 const noteAtom = atom<Note[]>([]);
 
 export const useNoteStore = () => {
-    const [notes, setNotes] = useAtom(noteAtom);
+  const [notes, setNotes] = useAtom(noteAtom);
 
-    const set = (newNotes: Note[]) => {
-        setNotes(oldNotes => {
-            const combineNotes = [...oldNotes, ...newNotes];
-            const uniqueNotes: { [key: number]: Note; } = {};
-            for (const note of combineNotes) {
-                uniqueNotes[note.id] = note;
-            }
-            return Object.values(uniqueNotes);
-        });
-    };
+  const set = (newNotes: Note[]) => {
+    setNotes((oldNotes) => {
+      const combineNotes = [...oldNotes, ...newNotes];
+      const uniqueNotes: { [key: number]: Note } = {};
+      for (const note of combineNotes) {
+        uniqueNotes[note.id] = note;
+      }
+      return Object.values(uniqueNotes);
+    });
+  };
 
-    return {
-        getAll: () => notes,
-        set
-    };
+  return {
+    getAll: () => notes,
+    set,
+  };
 };

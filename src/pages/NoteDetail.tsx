@@ -1,4 +1,4 @@
-import { TitleInput } from '@/components/Toolbar';
+import { TitleInput } from "@/components/Toolbar";
 
 const NoteDetail = () => {
   return (
