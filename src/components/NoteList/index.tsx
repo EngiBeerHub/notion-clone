@@ -3,6 +3,7 @@ import { NoteItem } from "./NoteItem.tsx";
 import { useNoteStore } from "@/modules/notes/note.state.ts";
 import { useCurrentUserStore } from "@/modules/auth/current-user.state.ts";
 import { noteRepository } from "@/modules/notes/note.repository.ts";
+import { Note } from "@/modules/notes/note.entity.ts";
 
 interface NoteListProps {
   layer?: number;
@@ -13,11 +14,20 @@ export function NoteList({ layer = 0, parentId }: NoteListProps) {
   const noteStore = useNoteStore();
   const notes = noteStore.getAll();
   const { currentUser } = useCurrentUserStore();
+
   const createChild = async (e: React.MouseEvent, parentId: number) => {
     e.stopPropagation();
     const newNote = await noteRepository.create(currentUser!.id, { parentId });
     noteStore.set([newNote]);
   };
+
+  const fetchChildren = async (e: React.MouseEvent, note: Note) => {
+    e.stopPropagation();
+    const children = await noteRepository.find(currentUser!.id, note.id);
+    if (children == null) return;
+    noteStore.set(children);
+  };
+
   return (
     <>
       <p
@@ -35,6 +45,7 @@ export function NoteList({ layer = 0, parentId }: NoteListProps) {
             <NoteItem
               note={note}
               layer={layer}
+              onExpand={(e: React.MouseEvent) => fetchChildren(e, note)}
               onCreate={(e) => createChild(e, note.id)}
             />
           </div>
